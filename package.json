@@ -1,0 +1,12 @@
+{
+  "name": "threejs_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Iora.js",
+  "scripts": {
+    "server": "npx server ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

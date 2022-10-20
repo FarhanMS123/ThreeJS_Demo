@@ -1,0 +1,6 @@
+{
+    "imports": {
+        "three": "https://ga.jspm.io/npm:three@0.136.0/build/three.module.js",
+        "Iora": "/Iora.js"
+    }
+}
