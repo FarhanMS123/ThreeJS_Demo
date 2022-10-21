@@ -1,12 +1,17 @@
 {
-  "name": "threejs_demo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "Iora.js",
+  "name": "vite_vanilla",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "server": "npx server ."
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "devDependencies": {
+    "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "laravel-vite-plugin": "^0.6.1"
+  }
 }
