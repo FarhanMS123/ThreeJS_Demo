@@ -7,6 +7,7 @@ export default defineConfig({
             input: [
                 'resources/js/Scene.js',
             ],
+            buildDirectory: 'vendor',
             refresh: true,
         }),
     ],
