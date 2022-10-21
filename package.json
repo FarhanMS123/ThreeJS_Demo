@@ -9,7 +9,11 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^3.1.0",
-    "laravel-vite-plugin": "^0.6.1"
+    "laravel-vite-plugin": "^0.6.1",
+    "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "postprocessing": "^6.29.0",
+    "three": "^0.145.0"
   }
 }

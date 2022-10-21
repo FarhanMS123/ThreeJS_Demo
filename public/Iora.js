@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { GLTFLoader } from 'GLTFLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 // opts = options
 // ctx = context
@@ -30,7 +30,7 @@ export default async function Iora(opts){
 
     async function loadObject(){
         const loader = new GLTFLoader();
-        const gltf = await (new Promise((res,rej) => loader.load('/3d/halo.glb', res, null, rej)));
+        const gltf = await (new Promise((res,rej) => loader.load('/3d/halo.glb', res, undefined, rej)));
         const model = gltf.scene;
 
         model.name = "iora";
