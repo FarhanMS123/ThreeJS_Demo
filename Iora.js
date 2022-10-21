@@ -8,7 +8,7 @@ import { GLTFLoader } from 'GLTFLoader';
 export default async function Iora(opts){
     const {container} = opts;
     const renderer = new THREE.WebGLRenderer(opts);
-
+    
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera( 75, container.clientWidth/container.clientHeight, 0.1, 1000 );
     camera.position.z = 5;
