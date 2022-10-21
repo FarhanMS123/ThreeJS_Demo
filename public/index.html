@@ -12,6 +12,8 @@
             "imports": {
                 "three": "https://ga.jspm.io/npm:three@0.136.0/build/three.module.js",
                 "three/examples/jsm/loaders/": "https://unpkg.com/three@0.136.0/examples/jsm/loaders/",
+                "three/examples/jsm/helpers/": "https://unpkg.com/three@0.136.0/examples/jsm/helpers/",
+                "three/examples/jsm/controls/": "https://unpkg.com/three@0.136.0/examples/jsm/controls/",
                 "postprocessing": "https://cdn.jsdelivr.net/npm/postprocessing@6.23.5/build/postprocessing.esm.js",
                 "Iora": "/Iora.js"
             }
@@ -29,7 +31,7 @@
             padding:0px;
         }
 
-        #iora{
+        #ccanvas{
             width: 100%;
             height: 100%;
         }
@@ -38,15 +40,15 @@
 </head>
 <body style="background:#eee;">
 
-    <div id="iora"></div>
+    <div id="ccanvas"></div>
     
     <script async type="module">
-        import Iora from "Iora";
+        import Scene1 from './Scene1.js';
 
-        const container = document.getElementById("iora");
-        const iora = await Iora({alpha:true, antialias:true, container});
-        console.log(iora);
-        window.iora = iora;
+        const ccanvas = document.getElementById("ccanvas");
+        const scene1 = await Scene1({alpha: true, antialias: true, container: ccanvas});
+        console.log(scene1);
+        window.scene1 = scene1;
     </script>
 </body>
 </html>

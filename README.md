@@ -7,7 +7,10 @@
 6. Compile using `npm run build`
 7. Serve static file using `npm run serve`
 
-## Tools
+## Tools & Modules
+- https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments
+- https://github.com/pmndrs/postprocessing
+- https://threejs.org/editor/
 
 ## Development Recommendation
 
@@ -15,12 +18,12 @@
 - https://laravel.com/docs/9.x/frontend#bundling-assets
 - https://laravel.com/docs/9.x/vite
 - https://github.com/laravel/laravel
+
 - https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene
 - https://threejs.org/docs/index.html#manual/en/introduction/Installation
 - https://threejs.org/docs/index.html#manual/en/introduction/Loading-3D-models
 - https://threejs.org/docs/index.html#manual/en/introduction/How-to-use-post-processing
 - https://threejs.org/docs/index.html#manual/en/introduction/Animation-system
-
-## Recommendation
-- https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments
-- https://github.com/pmndrs/postprocessing
+  
+- https://threejs.org/docs/index.html#api/en/helpers/ArrowHelper
+- https://threejs.org/docs/index.html#examples/en/controls/ArcballControls

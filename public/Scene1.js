@@ -15,7 +15,7 @@ export default async function Scene1(opts){
     }
     const { container } = opts;
 
-    const isRender = false;
+    let isRender = false;
     let frame = 0;
     let _time = 0;
     const state = {};
@@ -27,21 +27,6 @@ export default async function Scene1(opts){
 
     const scene = new THREE.Scene();
 
-    await loadLights();
-    await loadCameras();
-    await setupEffects();
-    await registerMaterials();
-    await registerTexture();
-    await loadObjects();
-    await registerObjects();
-    await registerClip();
-    await loadHelper();
-    await loadControl();
-    await initGUI();
-
-    scene.dispatchEvent({ type:'ready', renderer, scene });
-    start();
-
     // ###################################
     // ### Load & Register Scene #########
 
@@ -49,7 +34,8 @@ export default async function Scene1(opts){
 
     const cameras = [];
     async function loadCameras() { 
-        const cam1 = new THREE.PerspectiveCamera( 75, container.clientWidth / container.clientHeight, 0.1, 1000 );
+        cameras.cam1 = new THREE.PerspectiveCamera( 75, container.clientWidth / container.clientHeight, 0.1, 1000 );
+        cameras.cam1.position.setZ(5);
     }
 
     let composer;
@@ -65,37 +51,43 @@ export default async function Scene1(opts){
         // composer.addPass(new EffectPass(camera, effects));
     }
 
+    // Registering geometry, material, and texture, and then store
+    // them to desired container would be good if they would be use
+    // over again by other objects. This also could prevent reconstruct
+    // the same object twice or more.
+    let geometries = [];
     let materials = [];
-    async function registerMaterials() {  }
-
     let textures = [];
-    async function registerTexture() {  }
-
-    let gltfModel;
-    async function loadObjects() {
+    async function registerObjects() { 
         const gltfLoader = new GLTFLoader();
 
-        // TODO: rename `gltfModel` to desire model name, such as `gltfEarth`
+        await loadModel({gltfLoader});
+
+        await createCube();
+    }
+
+    // TODO: rename `gltfModel` and others to desire model name, such as `gltfEarth`
+    let gltfModel, mixerModel, actionModel;
+    async function loadModel({ gltfLoader }) {
+        // Load Object
         // gltfModel = await new Promise((res, rej) => gltfLoader.load("/to/glb/file.glb", res, undefined, rej));
         // gltfModel.scene.name = "model";
-    }
-
-    async function registerObjects() { 
         // scene.add( gltfModel.scene );
 
-        const geometry = new THREE.BoxGeometry( 1, 1, 1, );
-        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    }
-
-    let mixerModel, actionModel;
-    async function registerClip() { 
-        // TODO: rename `mixerModel` and `actionModel` with your desire
-        // TODO: model name, such as `mixerEarth`, `actionEarth`
+        // Register Clip
         // const mesh = gltfModel.scene.children[0];
         // mixerModel = new THREE.AnimationMixer( mesh );
         // const clips = gltfModel.animations;
         // const clip = clips[0];
         // actionModel = mixer.clipAction(clip);
+    }
+
+    let cube;
+    async function createCube(){
+        const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
     }
 
     async function loadHelper() {  }
@@ -112,31 +104,45 @@ export default async function Scene1(opts){
 
     function update(){
         updateCamera();
+        updateProjectionMatrix();
 
         scene.dispatchEvent({ type:'update', renderer, scene });
     }
 
-    function getCamera(){
-        return cameras[0];
+    function getCamera(opts){
+        opts = {
+            type: 'default',
+            ...opts,
+        };
+        const { type } = opts;
+
+        return cameras.cam1;
     }
 
     function updateCamera(){
-        const camera = getCamera();
-        camera?.aspect = container.clientWidth / container.clientHeight;
-        camera?.updateProjectionMatrix();
+        const camera = getCamera({ type: 'all' });
+        if(camera){
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+        }
     }
+
+    function updateProjectionMatrix(){  }
 
     function animate(){
         // TODO: put animation movement here.
+        // TODO: change animation below
+        cube.rotation.x += 0.01;
+		cube.rotation.y += 0.01;
 
         scene.dispatchEvent({ type:'animate', renderer, scene });
     }
 
     function prerender(){
         renderer.setSize( container.clientWidth, container.clientHeight );
-        renderer.render( scene, camera );
+        renderer.render( scene, getCamera({ type: 'default' }) );
 
-        // * If use EffectComposer instead.
+        // If use EffectComposer instead.
         // composer.render();
     }
 
@@ -154,6 +160,17 @@ export default async function Scene1(opts){
 
     // ###################################
     // ### Core Function #################
+
+    await loadLights();
+    await loadCameras();
+    await setupEffects();
+    await registerObjects();
+    await loadHelper();
+    await loadControl();
+    await initGUI();
+
+    scene.dispatchEvent({ type:'ready', renderer, scene });
+    start();
 
     function tick(t=0){
         frame++;
@@ -191,8 +208,8 @@ export default async function Scene1(opts){
 
     Object.assign(renderer, {
         scene, start, stop, state, composer, reassign,
-        cameras, materials, textures, 
-        gltfModel, mixerModel, actionModel
+        cameras, materials, textures, geometries,
+        gltfModel, mixerModel, actionModel, cube,
     });
 
     return renderer;
