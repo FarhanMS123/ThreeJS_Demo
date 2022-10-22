@@ -177,6 +177,7 @@ export default async function Scene1(opts){
         // TODO: put animation movement here.
         // TODO: change animation below
         if(typeof animateCone == 'function') animateCone();
+        // if(actionModel) actionModel.update(clock.getDelta());
 
         scene.dispatchEvent({ type:'animate', renderer, scene });
     }

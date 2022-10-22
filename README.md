@@ -9,8 +9,12 @@
 
 ## Tools & Modules
 - https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments
-- https://github.com/pmndrs/postprocessing
 - https://threejs.org/editor/
+- 
+- https://github.com/pmndrs/postprocessing
+- http://tweenjs.github.io/tween.js/
+- https://animejs.com/
+- 
 - [WTF are all these config files for? (Youtube Fireship)](https://www.youtube.com/watch?v=14WanxTD2O4)
 - https://lil-gui.georgealways.com/
 - https://github.com/dataarts/dat.gui
@@ -20,6 +24,7 @@
 - This repo follows Laravel 9 structures to make standar guidelines for Frontend Developper who works with Laravel Backend Developer.
 - Vite and Node Modules with ThreeJS and some Preprocessor are preinstall to make development easier with Typescript highlighting.
 - The `Scene1.js` can be used with Vite. Just move it to `resources/js/` and configure `vite.config.js`
+- Use Helper such as `BoxHelper` and `GridHelper` if you want to find some object which cannot be shown in camera, or to find where is `[0,0]`.
 
 ## Alternative
 - PixiJS
