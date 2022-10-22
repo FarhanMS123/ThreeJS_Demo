@@ -11,7 +11,7 @@
 - https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments
 - https://threejs.org/editor/
 - [Mathematical Algorithm for Proximity & Flying Effects](https://www.figma.com/file/Kh1VWtgi8tXFVOOKrJkWgk/Proximity-Effects-Algorithm?node-id=0%3A1)
-- 
+
 - https://github.com/pmndrs/postprocessing
 - http://tweenjs.github.io/tween.js/
 - https://animejs.com/
