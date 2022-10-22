@@ -10,6 +10,7 @@
 ## Tools & Modules
 - https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments
 - https://threejs.org/editor/
+- (Mathematical Algorithm for Proximity & Flying Effects)[https://www.figma.com/file/Kh1VWtgi8tXFVOOKrJkWgk/Proximity-Effects-Algorithm?node-id=0%3A1]
 - 
 - https://github.com/pmndrs/postprocessing
 - http://tweenjs.github.io/tween.js/
@@ -40,6 +41,7 @@
 - https://www.typescriptlang.org/tsconfig
 - https://prettier.io/docs/en/configuration.html
 - https://editorconfig.org/
+- [Proximity Effect (Youtube Beyond Fireship)](https://www.youtube.com/watch?v=TGe3pS5LqEw)
 
 - https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene
 - https://threejs.org/docs/index.html#manual/en/introduction/Installation

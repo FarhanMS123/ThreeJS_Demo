@@ -32,9 +32,9 @@ export default async function Scene1(opts){
     // ### Load & Register Scene #########
 
     //* It is better to put high scope variables on the top
-    //* top of corresponding function. Also for Lights,
-    //* and any object could be named by `object.name` so
-    //* it could be find by `scene.getChildrenByName`.
+    //* of corresponding function. Also for Lights, and any 
+    //* object could be named by `object.name` so it could
+    //* be find by `scene.getChildrenByName`.
 
     async function loadLights() {
         const light = new THREE.AmbientLight( 0xffffff, 1 ); // soft white light
