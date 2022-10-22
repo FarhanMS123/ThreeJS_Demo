@@ -10,12 +10,12 @@
 ## Tools & Modules
 - https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments
 - https://threejs.org/editor/
-- (Mathematical Algorithm for Proximity & Flying Effects)[https://www.figma.com/file/Kh1VWtgi8tXFVOOKrJkWgk/Proximity-Effects-Algorithm?node-id=0%3A1]
+- [Mathematical Algorithm for Proximity & Flying Effects](https://www.figma.com/file/Kh1VWtgi8tXFVOOKrJkWgk/Proximity-Effects-Algorithm?node-id=0%3A1)
 - 
 - https://github.com/pmndrs/postprocessing
 - http://tweenjs.github.io/tween.js/
 - https://animejs.com/
-- 
+
 - [WTF are all these config files for? (Youtube Fireship)](https://www.youtube.com/watch?v=14WanxTD2O4)
 - https://lil-gui.georgealways.com/
 - https://github.com/dataarts/dat.gui
