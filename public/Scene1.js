@@ -4,7 +4,8 @@
  */
 
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
 // import { EffectComposer, RenderPass, EffectPass } from 'postprocessing';
 
 export default async function Scene1(opts){
@@ -30,51 +31,62 @@ export default async function Scene1(opts){
     // ###################################
     // ### Load & Register Scene #########
 
+    //* It is better to put high scope variables on the top
+    //* top of corresponding function. Also for Lights,
+    //* and any object could be named by `object.name` so
+    //* it could be find by `scene.getChildrenByName`.
+
     async function loadLights() {  }
 
     const cameras = [];
     async function loadCameras() { 
         cameras.cam1 = new THREE.PerspectiveCamera( 75, container.clientWidth / container.clientHeight, 0.1, 1000 );
-        cameras.cam1.position.setZ(5);
+        cameras.cam1.position.set(-7, 6.7, 6.6);
+        cameras.cam1.rotation.set(-0.97, -0.57, -0.53);
     }
 
     let composer;
     async function setupEffects() {
-        // Renderer
+        // ### Renderer ##
         renderer.outputEncoding = THREE.sRGBEncoding;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.setPixelRatio(window.devicePixelRatio);
 
-        // Postprocessing
+        // ### Postprocessing ##
         // composer = new EffectComposer(renderer);
         // composer.addPass(new RenderPass(scene, camera));
         // composer.addPass(new EffectPass(camera, effects));
     }
 
-    // Registering geometry, material, and texture, and then store
-    // them to desired container would be good if they would be use
-    // over again by other objects. This also could prevent reconstruct
-    // the same object twice or more.
-    let geometries = [];
+    //! To prevent same material to be reinitialize and leading to 
+    //! duplicated, the material could be stored in a collector.
     let materials = [];
+    async function registerMaterials(){  }
+
+    //! To prevent same texture to be reinitialize and leading to 
+    //! duplicated, the texture could be stored in a collector.
     let textures = [];
+    async function registerTextures() {  }
+    
+    let geometries = [];
     async function registerObjects() { 
         const gltfLoader = new GLTFLoader();
 
         await loadModel({gltfLoader});
 
-        await createCube();
+        await createCone();
     }
 
+    // TODO: Load object and registering clip can be done in their own function.
     // TODO: rename `gltfModel` and others to desire model name, such as `gltfEarth`
     let gltfModel, mixerModel, actionModel;
     async function loadModel({ gltfLoader }) {
-        // Load Object
+        // ### Load Object ##
         // gltfModel = await new Promise((res, rej) => gltfLoader.load("/to/glb/file.glb", res, undefined, rej));
         // gltfModel.scene.name = "model";
         // scene.add( gltfModel.scene );
 
-        // Register Clip
+        // ### Register Clip ##
         // const mesh = gltfModel.scene.children[0];
         // mixerModel = new THREE.AnimationMixer( mesh );
         // const clips = gltfModel.animations;
@@ -82,40 +94,72 @@ export default async function Scene1(opts){
         // actionModel = mixer.clipAction(clip);
     }
 
-    let cube;
-    async function createCube(){
-        const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
+    /**
+     * Registering Geometry, Material, Texture, and Helper can be done
+     * in their own function. Registering clips, animating, or even 
+     * controller could also be done in the same function.
+     */
+    let cone, animateCone;
+    async function createCone(){
+        const geometry = new THREE.ConeGeometry( 1, 3, 3, 1 );
+        const material = new THREE.MeshBasicMaterial( { color: 0x3498db } );
+        cone = new THREE.Mesh(geometry, material);
+        scene.add(cone);
+
+        const wireframe = new THREE.WireframeGeometry( geometry );
+        const lineCone = new THREE.LineSegments( wireframe );
+        lineCone.material.depthTest = true;
+        cone.add( lineCone );
+
+        const box = new THREE.BoxHelper( cone, 0xff0000 );
+        cone.add( box );
+
+        //* You could use `frame`, `_time`, and `clock`
+        //* to keep times change.
+        animateCone = function (){
+            cone.rotation.x += 0.01;
+		    cone.rotation.y += 0.01;
+        }
     }
 
-    async function loadHelper() {  }
+    async function loadHelper() {
+        const gridHelper = new THREE.GridHelper( 10, 10 );
+        scene.add( gridHelper );
+    }
 
-    async function loadControl() {  }
+    let trackball;
+    async function loadControl() {
+        const camera = getCamera({ type: 'current' });
+        const canvas = renderer.domElement;
+        trackball = new TrackballControls(camera, canvas);
+
+        trackball.rotateSpeed = 1.0;
+        trackball.zoomSpeed = 1.2;
+        trackball.panSpeed = 0.8;
+
+        trackball.keys = [ 'KeyA', 'KeyS', 'KeyD' ];
+    }
 
     async function initGUI() {  }
 
     // ###################################
     // ### Load & Register Scene #########
 
-    // ! All updating and animating must be done Synchronously.
-    // ! Async animating could lead to glitch in animation
+    //! All updating and animating must be done Synchronously.
+    //! Async animation could lead to glitch in animation
 
     function update(){
         updateCamera();
         updateProjectionMatrix();
 
+        trackball.handleResize();
+        trackball.update();
+
         scene.dispatchEvent({ type:'update', renderer, scene });
     }
 
-    function getCamera(opts){
-        opts = {
-            type: 'default',
-            ...opts,
-        };
-        const { type } = opts;
-
+    // type = default|current|all|ordered|random
+    function getCamera({ type='current' }){
         return cameras.cam1;
     }
 
@@ -127,30 +171,30 @@ export default async function Scene1(opts){
         }
     }
 
-    function updateProjectionMatrix(){  }
+    function updateProjectionMatrix() {  }
 
     function animate(){
         // TODO: put animation movement here.
         // TODO: change animation below
-        cube.rotation.x += 0.01;
-		cube.rotation.y += 0.01;
+        if(typeof animateCone == 'function') animateCone();
 
         scene.dispatchEvent({ type:'animate', renderer, scene });
     }
 
     function prerender(){
+        // TODO: Comment if using EffectComposer
         renderer.setSize( container.clientWidth, container.clientHeight );
         renderer.render( scene, getCamera({ type: 'default' }) );
 
-        // If use EffectComposer instead.
+        // TODO: Uncoment if using EffectComposer instead.
         // composer.render();
     }
 
     // ###################################
     // ### Event Listener ################
 
-    // TODO: it is better to put event listener in one place
-    // TODO: use Scene as EventDispacther
+    // TODO: it is better to put event listener in one place.
+    // TODO: use Scene as EventDispacther.
 
     scene.addEventListener('ready', function(event){   });
     scene.addEventListener('start', function(event){   });
@@ -164,6 +208,8 @@ export default async function Scene1(opts){
     await loadLights();
     await loadCameras();
     await setupEffects();
+    await registerMaterials();
+    await registerTextures();
     await registerObjects();
     await loadHelper();
     await loadControl();
@@ -197,7 +243,7 @@ export default async function Scene1(opts){
         scene.dispatchEvent({ type:'stop', renderer, scene });
     }
 
-    // ! Only assign changeable property.
+    //! Only assign changeable property.
     function reassign(){
         Object.assign(renderer, {
             meta: {
@@ -206,10 +252,12 @@ export default async function Scene1(opts){
         });
     }
 
+    //! Static property would always static so there is
+    //! no need to reassign them.
     Object.assign(renderer, {
         scene, start, stop, state, composer, reassign,
         cameras, materials, textures, geometries,
-        gltfModel, mixerModel, actionModel, cube,
+        gltfModel, mixerModel, actionModel, cone,
     });
 
     return renderer;

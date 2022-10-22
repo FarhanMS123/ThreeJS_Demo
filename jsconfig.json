@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./public/",
+        "rootDir": "./public/",
+        "paths": {
+            "/": ["public/"]
+        }
+    },
+    "include": ["public"],
+    "exclude": ["node_modules/**"]
+}

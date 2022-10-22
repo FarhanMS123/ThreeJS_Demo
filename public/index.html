@@ -11,9 +11,7 @@
         {
             "imports": {
                 "three": "https://ga.jspm.io/npm:three@0.136.0/build/three.module.js",
-                "three/examples/jsm/loaders/": "https://unpkg.com/three@0.136.0/examples/jsm/loaders/",
-                "three/examples/jsm/helpers/": "https://unpkg.com/three@0.136.0/examples/jsm/helpers/",
-                "three/examples/jsm/controls/": "https://unpkg.com/three@0.136.0/examples/jsm/controls/",
+                "three/examples/jsm/": "https://unpkg.com/three@0.136.0/examples/jsm/",
                 "postprocessing": "https://cdn.jsdelivr.net/npm/postprocessing@6.23.5/build/postprocessing.esm.js",
                 "Iora": "/Iora.js"
             }
@@ -31,6 +29,10 @@
             padding:0px;
         }
 
+        body{
+            background: #444;
+        }
+
         #ccanvas{
             width: 100%;
             height: 100%;
@@ -38,12 +40,12 @@
     </style>
 
 </head>
-<body style="background:#eee;">
+<body>
 
     <div id="ccanvas"></div>
     
     <script async type="module">
-        import Scene1 from './Scene1.js';
+        import Scene1 from '/Scene1.js';
 
         const ccanvas = document.getElementById("ccanvas");
         const scene1 = await Scene1({alpha: true, antialias: true, container: ccanvas});
