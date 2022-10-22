@@ -11,13 +11,15 @@
 - https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments
 - https://threejs.org/editor/
 - [Mathematical Algorithm for Proximity & Flying Effects](https://www.figma.com/file/Kh1VWtgi8tXFVOOKrJkWgk/Proximity-Effects-Algorithm?node-id=0%3A1)
-
-
+<br />
+<br />
+<br />
 - https://github.com/pmndrs/postprocessing
 - http://tweenjs.github.io/tween.js/
 - https://animejs.com/
-
-
+<br />
+<br />
+<br />
 - [WTF are all these config files for? (Youtube Fireship)](https://www.youtube.com/watch?v=14WanxTD2O4)
 - https://lil-gui.georgealways.com/
 - https://github.com/dataarts/dat.gui
@@ -44,14 +46,16 @@
 - https://prettier.io/docs/en/configuration.html
 - https://editorconfig.org/
 - [Proximity Effect (Youtube Beyond Fireship)](https://www.youtube.com/watch?v=TGe3pS5LqEw)
-
-
+<br />
+<br />
+<br />
 - https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene
 - https://threejs.org/docs/index.html#manual/en/introduction/Installation
 - https://threejs.org/docs/index.html#manual/en/introduction/Loading-3D-models
 - https://threejs.org/docs/index.html#manual/en/introduction/How-to-use-post-processing
 - https://threejs.org/docs/index.html#manual/en/introduction/Animation-system
-
-
+<br />
+<br />
+<br />
 - https://threejs.org/docs/index.html#api/en/helpers/ArrowHelper
 - https://threejs.org/docs/index.html#examples/en/controls/ArcballControls
