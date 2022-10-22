@@ -59,3 +59,6 @@
 
 - https://threejs.org/docs/index.html#api/en/helpers/ArrowHelper
 - https://threejs.org/docs/index.html#examples/en/controls/ArcballControls
+
+## License
+Iora Model is not created by me and is not allowed to be used by anyone for public or private projects.
