@@ -61,4 +61,6 @@
 - https://threejs.org/docs/index.html#examples/en/controls/ArcballControls
 
 ## License
-Iora Model is not created by me and is not allowed to be used by anyone for public or private projects.
+All scripts, except I.O.R.A 3D Model, is free to use and preservated under MIT License.
+
+I.O.R.A 3D Model is created by [Alexander Rainer](https://www.linkedin.com/in/alexrai/) and belongs to BNCC Event Organizer and Technoscape Team. This model could only be used by internal team and not allowed for public use.
